@@ -2,13 +2,13 @@
 
 Chat with your SQL database and make complex queries with natural language using LLMs
 
-(demo)
+![demo](/public/chat-your-data.gif)
 
 The system enables users to interact with databases using natural language. It understands questions, generates queries, interprets results, and creates meaningful visualizations.
 
 ## Tech Stack and Architecture
 
-The system was built with: **LangChain** & **LangGraph** (LLM interaction and workflow), **Chainlit** (frontend), **BigQuery** (database) and **Google Gemini**.
+It was built with: **LangChain** & **LangGraph** (LLM interaction and workflow), **Chainlit** (frontend), **BigQuery** (database) and **Google Gemini**.
 
 The code is orchestrated between LLM functions and the Chainlit frontend following this architecture:
 
@@ -46,7 +46,7 @@ The system follows a simple 5-step workflow:
 
 ### Configuration
 
-There are required environment variables. You must change the 
+There are required environment variables. You must change the .env and have the database set up on BigQuery:
 
 ```bash
 GOOGLE_API_KEY=your_gemini_api_key
