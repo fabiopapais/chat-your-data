@@ -15,18 +15,13 @@ from system_prompts import (
     dataviz_system_prompt,
 )
 
-from langchain_community.llms import Ollama
-from langchain_openai import ChatOpenAI
-
-import chainlit as cl
-
 load_dotenv()
 
 def get_default_llm():
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
         raise ValueError("GOOGLE_API_KEY environment variable is required")
-    return init_chat_model("gemini-2.5-flash", model_provider="google_genai")
+    return init_chat_model("gemini-2.5-flash-lite", model_provider="google_genai")
 
 def get_default_db():
     return get_instance()
@@ -278,7 +273,3 @@ if __name__ == "__main__":
         print(f"Workflow error: {e}")
 
     print(current_state)
-
-# TODO: suporte à outros modelos
-# TODO: retry para queries que falharem
-# TODO: checar se a pergunta é válida

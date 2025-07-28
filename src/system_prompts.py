@@ -69,7 +69,7 @@ Você tem acesso a um DataFrame 'df' e deve adicionar figuras à lista 'figs'.
 REGRAS:
 - Utilize APENAS Matplotlib e Pandas
 - SEMPRE adicione a figura à lista 'figs' usando figs.append(fig)
-- Utilize SOMENTE as colunas presentes no DataFrame 'df'
+- Utilize SOMENTE as colunas presentes no DataFrame 'df' que você JÁ POSSUI em ambiente
 - Tome cuidado para NÃO usar valores 'None'
 - Retorne apenas o código Python necessário para gerar a visualização, sem explicações adicionais
 - Faça visualizações que sejam relevantes para a pergunta original

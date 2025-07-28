@@ -9,10 +9,10 @@ import pandas as pd
 load_dotenv()
 
 GCP_KEY_PATH = os.getenv("GCP_KEY_PATH", "./gcpkey.json")
-COLLECTION_NAME = os.getenv("COLLECTION_NAME", "creditRisk")
+DATABASE_NAME = os.getenv("DATABASE_NAME", "creditRisk")
 
 FIELDS_DESCR = {
-    f"{COLLECTION_NAME}.train": {
+    f"{DATABASE_NAME}.train": {
         "REF_DATE": "data de referência do registro",
         "TARGET": "alvo binário de inadimplência (1: Mau Pagador, i.e. atraso > 60 dias em 2 meses)",
         "VAR2": "sexo do indivíduo ('M' ou 'F')",
@@ -31,8 +31,8 @@ logger = logging.getLogger()
 class BigQueryDatabase:
     """BigQuery Database configuration, setup and access"""
 
-    def __init__(self, collection_name):
-        self.collection_name = collection_name
+    def __init__(self, database_name):
+        self.database_name = database_name
 
         self._client, self.project_id = self._create_client()
         self.tables = self._load_tables()
@@ -61,12 +61,12 @@ class BigQueryDatabase:
     def _load_tables(self) -> list:
         """Load and return table names"""
         try:
-            dataset_ref = f"{self.project_id}.{self.collection_name}"
+            dataset_ref = f"{self.project_id}.{self.database_name}"
 
             # List tables and extract only the table_id (name)
             tables_iterator = self._client.list_tables(dataset_ref)
             table_names = [
-                f"{self.collection_name}.{table.table_id}" for table in tables_iterator
+                f"{self.database_name}.{table.table_id}" for table in tables_iterator
             ]
 
             logger.info(f"Found {len(table_names)} tables: {table_names}")
@@ -77,6 +77,7 @@ class BigQueryDatabase:
             return []
 
     def _generate_schemas(self):
+        """Generates and formats schemas for to provide context"""
         schemas = []
         for table_name in self.tables:
             full_table_name = f"{self.project_id}.{table_name}"
@@ -127,8 +128,8 @@ class BigQueryDatabase:
             raise
 
 
-bigquery_db = BigQueryDatabase(COLLECTION_NAME)
-
+# instantiate single global client
+bigquery_db = BigQueryDatabase(DATABASE_NAME)
 
 def get_instance() -> BigQueryDatabase:
     """Get the global BigQueryDatabase instance"""
