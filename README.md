@@ -1,6 +1,6 @@
 # chat-your-data
 
-Chat with your SQL database and make complex queries with natural language using LLMs
+Chat with your SQL database and make complex queries with natural language using LLMs.
 
 ![demo](/public/chat-your-data.gif)
 
@@ -95,10 +95,10 @@ python test_workflow.py
 ## Highlights
 
 - **Scalability** - SQL-based queries and multi-table support for complex datasets
-- **Zero Trust for LLMs** - The system is designed with a zero trust principle, ensuring read-only queries and output sanitization (by default)
 - **Context Management** - Automatically handles large datasets and queries results without token overflow
 - **Automated Visualizations** - Generates meaningful charts when sufficient data is available
 - **Handles no result queries** - Manages cases where queries return no results and prevents errors
+- **Zero Trust for LLMs** - The system is designed with a zero trust principle, ensuring read-only queries and output sanitization (by default)
 - **Standard Workflow** - Follows similar approaches to other validated text-to-SQL systems (https://arxiv.org/pdf/2410.01066, https://arxiv.org/abs/2406.08426, etc)
 
 ## Challenges and future work
@@ -108,4 +108,8 @@ python test_workflow.py
 - Automatic Schema description
 - Improve workflow with retries and better error handling
     
-    This was attempted but could be better with an agentic approach (agent having access to tools, contrary to current static workflow)
+    This was attempted but could be better with an agentic approach (agent having access to tools, contrary to current static workflow and llm request)
+- More accuracy with visualization generation 
+
+    Even with a lot of given context, the LLMs still make wrong assumptions about the data, fabricate data and generate wrong visualizations. Better prompt engineering or specialist models may improve this.
+- Test dedicated models such as https://huggingface.co/defog/llama-3-sqlcoder-8b
