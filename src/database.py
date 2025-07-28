@@ -1,15 +1,18 @@
 import os
 import logging
+from dotenv import load_dotenv
 
 from google.cloud import bigquery
 from google.oauth2 import service_account
 import pandas as pd
 
-GCP_KEY_PATH = "./gcpkey.json"
-COLLECTION_NAME = "creditRisk"
+load_dotenv()
+
+GCP_KEY_PATH = os.getenv("GCP_KEY_PATH", "./gcpkey.json")
+COLLECTION_NAME = os.getenv("COLLECTION_NAME", "creditRisk")
 
 FIELDS_DESCR = {
-    "creditRisk.train": {
+    f"{COLLECTION_NAME}.train": {
         "REF_DATE": "data de referência do registro",
         "TARGET": "alvo binário de inadimplência (1: Mau Pagador, i.e. atraso > 60 dias em 2 meses)",
         "VAR2": "sexo do indivíduo ('M' ou 'F')",
