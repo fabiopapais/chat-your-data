@@ -113,3 +113,6 @@ python test_workflow.py
 
     Even with a lot of given context, the LLMs still make wrong assumptions about the data, fabricate data and generate wrong visualizations. Better prompt engineering or specialist models may improve this.
 - Test dedicated models such as https://huggingface.co/defog/llama-3-sqlcoder-8b
+- Better integration with Chainlit
+
+    LangGraph streams do not work well with Chainlit, so we can't use Graphs full potential. It was necessary to implement a custom orchestrator to handle the workflow and Chainlit communication.
